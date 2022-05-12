@@ -15,13 +15,39 @@ function searchFood(e) {
     let name = e.target.form[0].selectedOptions[0].text;
     let quantity = e.target.form[1].value;
     let newFood = new Food(id, name, quantity);
-    renderFood(newFood);
-    console.log(newFood.url)
     fetch(newFood.url)
-    .then(res => res.json())
-    .then(ans => console.log(ans));
+        .then(res => res.json())
+        .then(ans => extractInfo(ans.foodNutrients, newFood));
 }
-function renderFood(food){
+function extractInfo(nutrients, food) {
+    let proteinGrams = 0;
+    let carbGrams = 0;
+    let fatGrams = 0;
+    let calories = 0;
+    for (let nutrient of nutrients) {
+        let name = nutrient.nutrient.name;
+        if (name == 'Protein') {
+            proteinGrams = nutrient.amount;
+        }
+        if (name == 'Carbohydrate, by difference'){
+            carbGrams = nutrient.amount;
+        }
+        if (name == 'Total fat (NLEA)'){
+            fatGrams = nutrient.amount;
+        }
+        if (name=='Energy'){
+            calories = nutrient.amount;
+        }
+    }
+    const macros = {
+        protein:proteinGrams,
+        carbs:carbGrams,
+        fat:fatGrams,
+        cals:calories
+    }
+    renderFood(food, macros)
+}
+function renderFood(food, macros) {
     let foodsContainer = document.getElementById('foodContainer');
     let foodContainer = document.createElement('div');
     foodContainer.classList.add('food-container');
@@ -32,20 +58,20 @@ function renderFood(food){
     quantity.classList.add('quantity')
     foodContainer.appendChild(foodName);
     foodContainer.appendChild(quantity);
-    addMacro('Protein', 500, foodContainer);
-    addMacro('Carbs', 500, foodContainer);
-    addMacro('Fat', 500, foodContainer);
-    addMacro('Calories', 500, foodContainer);
+    addMacro('Protein', macros.protein, foodContainer);
+    addMacro('Carbs', macros.carbs, foodContainer);
+    addMacro('Fat', macros.fat, foodContainer);
+    addMacro('Calories', macros.cals, foodContainer);
     foodsContainer.appendChild(foodContainer);
 }
-function addMacro(n, g, container){
+function addMacro(n, g, container) {
     let name = document.createElement('p');
     let grams = document.createElement('span');
     grams.classList.add('grams')
     let macro = document.createElement('div');
     macro.classList.add('macro');
     name.innerText = `${n} `;
-    grams.innerText =`${g}`;
+    grams.innerText = `${g}`;
     name.appendChild(grams);
     macro.appendChild(name);
     container.appendChild(macro);
