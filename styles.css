@@ -53,6 +53,9 @@ select,
   max-width: 800px;
   margin: 0 auto;
 }
-.quantity::after, span::after{
+.quantity::after, .grams::after{
     content: 'g';
+}
+.cals::after{
+    content: 'kcal';
 }

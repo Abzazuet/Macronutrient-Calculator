@@ -24,27 +24,27 @@ function extractInfo(nutrients, food) {
     let carbGrams = 0;
     let fatGrams = 0;
     let calories = 0;
-    let factor = food.quantity/100;
+    let factor = food.quantity / 100;
     for (let nutrient of nutrients) {
         let name = nutrient.nutrient.name;
         if (name == 'Protein') {
             proteinGrams = nutrient.amount;
         }
-        if (name == 'Carbohydrate, by difference'){
+        if (name == 'Carbohydrate, by difference') {
             carbGrams = nutrient.amount;
         }
-        if (name == 'Total fat (NLEA)'){
+        if (name == 'Total fat (NLEA)') {
             fatGrams = nutrient.amount;
         }
-        if (name=='Energy'){
+        if (name == 'Energy') {
             calories = nutrient.amount;
         }
     }
     const macros = {
-        protein:proteinGrams*factor,
-        carbs:carbGrams*factor,
-        fat:fatGrams*factor,
-        cals:calories*factor,
+        protein: Math.round(proteinGrams * factor),
+        carbs: Math.round(carbGrams * factor),
+        fat: Math.round(fatGrams * factor),
+        cals: Math.round(calories * factor),
     }
     renderFood(food, macros);
     calculateTotal();
@@ -69,53 +69,58 @@ function renderFood(food, macros) {
 function addMacro(n, g, container) {
     let name = document.createElement('p');
     let grams = document.createElement('span');
-    grams.classList.add('grams')
-    let macro = document.createElement('div');
-    macro.id=n;
-    macro.classList.add('macro');
     name.innerText = `${n} `;
     grams.innerText = `${g}`;
+    if (n == 'Calories') {
+        grams.classList.add('cals');
+    }
+    else {
+        grams.classList.add('grams')
+    }
+    let macro = document.createElement('div');
+    macro.id = n;
+    macro.classList.add('macro');
+
     name.appendChild(grams);
     macro.appendChild(name);
     container.appendChild(macro);
 }
-function calculateTotal(){
+function calculateTotal() {
     let total = document.getElementById('total');
+    total.innerHTML = '';
     let foods = document.getElementsByClassName('food-container');
     let totalProtein = 0
     let totalCarbs = 0;
     let totalFat = 0;
-    let totalCalories=0;
-    for (let food of foods){
-        for (let macro of food.children){
-            if(macro.lastChild.lastChild!=null){
+    let totalCalories = 0;
+    let totalGrams = 0;
+    for (let food of foods) {
+        totalGrams += parseFloat(food.childNodes[1].textContent)
+        for (let macro of food.children) {
+            if (macro.lastChild.lastChild != null) {
                 let name = macro.id;
-                if(food.childNodes[0]=='Total'){
-                    break;
-                }
-                console.log(food.childNodes[0]);
                 let value = parseFloat(macro.lastChild.lastChild.textContent)
-                if (name =='Protein'){
-                    totalProtein+=value;
+                if (name == 'Protein') {
+                    totalProtein += value;
                 }
-                if (name =='Carbs'){
-                    totalCarbs+=value;
+                if (name == 'Carbs') {
+                    totalCarbs += value;
                 }
-                if (name =='Fat'){
-                    totalFat+=value;
+                if (name == 'Fat') {
+                    totalFat += value;
                 }
-                if (name =='Calories'){
-                    totalCalories+=value;
+                if (name == 'Calories') {
+                    totalCalories += value;
                 }
             }
         }
     }
-    let food = new Food(0, 'Total', 1);
+    let food = new Food(0, 'Total', totalGrams);
     const macros = {
-        protein:totalProtein,
-        carbs:totalCarbs,
-        fat:totalFat,
-        cals:totalCalories,
+        protein: totalProtein,
+        carbs: totalCarbs,
+        fat: totalFat,
+        cals: totalCalories,
     }
     let foodContainer = document.createElement('div');
     foodContainer.classList.add('food-container');
