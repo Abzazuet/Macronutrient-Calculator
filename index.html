@@ -6,12 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phase 1 Project</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-
-
+    <h1>Food Macronutrient Calculator</h1>
+    <form action="#">
+        <div class="container">
+            <label for="foodSelection">Select food: </label>
+            <select name="foodSelection" id="food">
+                <option value="none">None</option>
+                <option value="749420">Bacon</option>
+                <option value="747997">Egg</option>
+                <option value="746952">Ham</option>
+                <option value="746782">Milk</option>
+            </select>
+        </div>
+        <div class="container">
+            <label for="quantity">Type Quantity in grams:</label>
+            <input type="number" name="quantity" id="quantity" min="1" class="input">
+        </div>
+        <input type="submit" value="Add food" class="btn" id="addFood">
+    </form>
+    <div class="foods-container" id="foodContainer">
+        <div class="food-container">
+            <h2>Food name</h2>
+            <h3 class="quantity">Quantity</h3>
+            <div class="macro">
+                <p>Protein <span>150g</span></p>
+            </div>
+            <div class="macro">
+                <p>Carb <span>150g</span></p>
+            </div>
+            <div class="macro">
+                <p>Fat<span>150g</span></p>
+            </div>
+            <div class="macro">
+                <p>Calories <span>150kcal</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="total">
+        <div class="food-container">
+            <h2>Total macros</h2>
+            <div class="macro">
+                <p>Protein <span>150g</span></p>
+            </div>
+            <div class="macro">
+                <p>Carb <span>150g</span></p>
+            </div>
+            <div class="macro">
+                <p>Fat<span>150g</span></p>
+            </div>
+        </div>
+    </div>
     <script src="./source/index.js"></script>
 </body>
 
