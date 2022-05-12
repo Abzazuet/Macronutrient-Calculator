@@ -1,6 +1,10 @@
 const addFood = document.getElementById('addFood');
 const apiKey = 'EQf661A4aTjhD5KeUSuyMeNz7jY35wWtvkckOKgU';
-addFood.addEventListener('click', e => searchFood(e));
+document.addEventListener("DOMContentLoaded", () => {
+    addFood.addEventListener('click', e => searchFood(e));
+    let copy = document.getElementById('copyTotal');
+    copy.addEventListener("click", e => copyTotal(e));
+});
 class Food {
     constructor(id, name, quantity) {
         this.id = id;
@@ -136,4 +140,11 @@ function calculateTotal() {
     addMacro('Fat', macros.fat, foodContainer);
     addMacro('Calories', macros.cals, foodContainer);
     total.appendChild(foodContainer);
+}
+function copyTotal(e) {
+    let total = document.getElementById('total');
+    let content = total.children[0].children
+    let str = `Total \nQuantity: ${content[1].textContent}\n${content[2].textContent}\n${content[3].textContent}\n${content[4].textContent}\n${content[5].textContent}`
+    navigator.clipboard.writeText(str);
+    alert("Copied the text: " + str);
 }
