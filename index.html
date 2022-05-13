@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phase 1 Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
     <h1>Food Macronutrient Calculator</h1>
-    <form action="#">
+    <form action="#" class="container">
         <div class="container">
             <label for="foodSelection">Select food: </label>
             <select name="foodSelection" id="food">
@@ -26,14 +28,14 @@
             <label for="quantity">Type Quantity in grams:</label>
             <input type="number" name="quantity" id="quantity" min="1" class="input">
         </div>
-        <input type="submit" value="Add food" class="btn" id="addFood">
+        <input type="submit" value="Add food" class="btn ounded-pill btn-rounded btn submit" id="addFood">
     </form>
     <div class="foods-container" id="foodContainer">
     </div>
     <div class="total" id="total">
 
     </div>
-    <button id="copyTotal" class="btn">
+    <button id="copyTotal" class="rounded-pill btn-rounded btn">
         Copy total
     </button>
     <script src="./source/index.js"></script>

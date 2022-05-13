@@ -5,6 +5,7 @@
   --button-color: #98c1d9;
   --hover-button: #d90429;
   --font1: #98c1d9;
+  --shadow: 5px 5px 5px black;
 }
 body {
   background-color: var(--bg-color);
@@ -17,28 +18,39 @@ form {
   color: var(--bg2-color);
   display: flex;
   flex-direction: row;
-  gap: 15px;
-  justify-content: center;
+  gap: 4rem;
+  margin: 2rem;
+  align-content: center;
+  box-shadow: var(--shadow);
 }
 select,
 .input {
   background-color: var(--bg2-color);
   border: none;
   color: var(--bg-color);
+  margin: .5rem;
 }
 .container {
   background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  
 }
 .btn {
   background-color: var(--button-color);
   border: none;
+  margin: 0 auto .5rem auto;
+}
+.submit{
+  margin: 0 auto .5rem auto;
 }
 .btn:hover {
   cursor: pointer;
   background-color: var(--hover-button);
 }
 .foods-container {
-  margin-top: 3rem;
+  margin: 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 5px;
@@ -47,15 +59,20 @@ select,
   background-color: var(--bg2-color);
   color: var(--bg-color);
   text-align: center;
+  margin: 3px auto;
+  box-shadow:var(--shadow);
+  min-width: 240px;
 }
 .total {
-  min-width: 250px;
-  max-width: 800px;
   margin: 0 auto;
+  width: 350px;
 }
 .quantity::after, .grams::after{
     content: 'g';
 }
 .cals::after{
     content: 'kcal';
+}
+#copyTotal{
+  margin-left: 2rem;
 }
