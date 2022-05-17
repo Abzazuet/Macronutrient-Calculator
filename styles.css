@@ -1,6 +1,7 @@
 :root {
   --bg-color: #2b2d42;
   --bg2-color: #8d99ae;
+  --bg3-color: rgb(32, 42, 58);
   --hover-background: #edf2f4;
   --button-color: #98c1d9;
   --hover-button: #d90429;
@@ -16,6 +17,7 @@ h1 {
 }
 form {
   color: var(--bg2-color);
+  background-color: var(--bg3-color);
   display: flex;
   flex-direction: row;
   gap: 4rem;
@@ -31,7 +33,6 @@ select,
   margin: .5rem;
 }
 .container {
-  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   gap: .5rem;
