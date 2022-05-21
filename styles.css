@@ -16,8 +16,6 @@ h1 {
   text-align: center;
 }
 form {
-  
-
   color: var(--bg2-color);
   background-color: var(--bg3-color);
   display: flex;
