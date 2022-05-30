@@ -1,7 +1,9 @@
-const addFood = document.getElementById('addFood');
+const addFood = document.querySelector('form');
 const apiKey = 'EQf661A4aTjhD5KeUSuyMeNz7jY35wWtvkckOKgU';
 document.addEventListener("DOMContentLoaded", () => {
-    addFood.addEventListener('click', e => searchFood(e));
+    addFood.addEventListener('submit', e => {
+        searchFood(e)
+    });
     let copy = document.getElementById('copyTotal');
     copy.addEventListener("click", e => copyTotal(e));
 });
@@ -15,9 +17,9 @@ class Food {
 }
 function searchFood(e) {
     e.preventDefault();
-    let id = e.target.form[0].selectedOptions[0].value;
-    let name = e.target.form[0].selectedOptions[0].text;
-    let quantity = e.target.form[1].value;
+    let id = e.target[0].selectedOptions[0].value;
+    let name = e.target[0].selectedOptions[0].text;
+    let quantity = e.target[1].value;
     let newFood = new Food(id, name, quantity);
     fetch(newFood.url)
         .then(res => res.json())
