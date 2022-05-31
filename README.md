@@ -42,4 +42,47 @@ And the select menu looks like this
 </select>
 ```
 I thought that the best approach was to define some predefined foods because the user might not have access to the food's id.
-## 
+## Displaying the information
+Once we had the information back from the GET request I had to multiplying by the correct quantity to get the correct amount and display it. I created some components and add it to the my foodContainer
+```js
+function renderFood(food, macros) {
+    let foodsContainer = document.getElementById('foodContainer');
+    let foodContainer = document.createElement('div');
+    foodContainer.classList.add('food-container');
+    let foodName = document.createElement('h2');
+    foodName.innerText = food.name;
+    let quantity = document.createElement('h3');
+    quantity.innerText = food.quantity;
+    quantity.classList.add('quantity')
+    foodContainer.appendChild(foodName);
+    foodContainer.appendChild(quantity);
+    addMacro('Protein', macros.protein, foodContainer);
+    addMacro('Carbs', macros.carbs, foodContainer);
+    addMacro('Fat', macros.fat, foodContainer);
+    addMacro('Calories', macros.cals, foodContainer);
+    foodsContainer.appendChild(foodContainer);
+}
+function addMacro(n, g, container) {
+    let name = document.createElement('p');
+    let grams = document.createElement('span');
+    name.innerText = `${n} `;
+    grams.innerText = `${g}`;
+    if (n == 'Calories') {
+        grams.classList.add('cals');
+    }
+    else {
+        grams.classList.add('grams')
+    }
+    let macro = document.createElement('div');
+    macro.id = n;
+    macro.classList.add('macro');
+
+    name.appendChild(grams);
+    macro.appendChild(name);
+    container.appendChild(macro);
+}
+```
+After that the final step was adding it to the total, which gets updated every time a new food is added.
+## Copying the total amount
+To be able to copy the total amount to the keyboard I saved all the relevant information into a string and I used the function `navigator.clipboard.writeText(str)`. And I used an alert to show the user the information copied to the clipboard.
+
